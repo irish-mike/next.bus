@@ -2,6 +2,13 @@
 // Rows are reused between refreshes and only changed text is touched,
 // so updates don't flash the whole list.
 export function renderArrivals(listEl, arrivals) {
+  if (arrivals.length === 0) {
+    listEl.innerHTML = '<li class="arrivals-empty">No buses due</li>';
+    return;
+  }
+  if (listEl.querySelector('.arrivals-empty')) {
+    listEl.innerHTML = '';
+  }
   syncRowCount(listEl, arrivals.length);
   arrivals.forEach((arrival, i) => updateRow(listEl.children[i], arrival));
 }

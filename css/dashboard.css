@@ -6,7 +6,7 @@
   --border: #1f2732;
   --text: #e8edf2;
   --text-dim: #7d8a9c;
-  --accent: #57d993;
+  --accent: #3ee0f5;
   --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, Menlo, monospace;
 }
 
@@ -23,6 +23,10 @@ body {
   color: var(--text);
   font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* Kiosk: stray touches shouldn't select text or rubber-band the page. */
+  -webkit-user-select: none;
+  user-select: none;
+  overscroll-behavior: none;
 }
 
 .dashboard {
@@ -116,20 +120,40 @@ body {
   margin-bottom: 0.6rem;
 }
 
-/* The very next bus gets a touch of emphasis. */
+/* The very next bus is the headline — bigger and accented. */
 .arrival:first-child {
-  border-color: rgba(87, 217, 147, 0.45);
+  border-color: rgba(62, 224, 245, 0.45);
+  padding-top: 1.15rem;
+  padding-bottom: 1.15rem;
+}
+
+.arrival:first-child .arrival-route {
+  font-size: 1.35rem;
+}
+
+.arrival:first-child .arrival-destination {
+  font-size: 1.2rem;
 }
 
 .arrival:first-child .arrival-due {
   color: var(--accent);
+  font-size: 1.6rem;
+}
+
+.arrivals-empty {
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 0.75rem;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  color: var(--text-dim);
 }
 
 .arrival-route {
   min-width: 3.6em;
   padding: 0.35em 0.6em;
   border-radius: 0.5rem;
-  background: rgba(87, 217, 147, 0.12);
+  background: rgba(62, 224, 245, 0.12);
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: 1.15rem;
@@ -164,10 +188,19 @@ body {
   color: var(--text-dim);
 }
 
-/* Larger panels (tablet on the wall) get roomier type. */
+/* Data hasn't refreshed lately: dim the list, warn in the status line. */
+.is-stale .arrivals-list {
+  opacity: 0.65;
+}
+
+.is-stale .arrivals-status {
+  color: #e0b357;
+}
+
+/* Larger panels (tablet on the wall) get type readable from a distance. */
 @media (min-width: 48em) {
   .dashboard {
-    max-width: 36rem;
+    max-width: 38rem;
     padding-top: 3.5rem;
   }
 
@@ -176,14 +209,78 @@ body {
   }
 
   .arrival-route {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
   }
 
   .arrival-destination {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
   }
 
   .arrival-due {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+  }
+
+  .arrival:first-child .arrival-route {
+    font-size: 1.7rem;
+  }
+
+  .arrival:first-child .arrival-destination {
+    font-size: 1.6rem;
+  }
+
+  .arrival:first-child .arrival-due {
+    font-size: 2.1rem;
+  }
+
+  .arrivals-status {
+    font-size: 0.95rem;
+  }
+}
+
+/* Wall-mounted landscape: clock and arrivals side by side so all six
+   rows fit on screen without scrolling. */
+@media (orientation: landscape) and (min-width: 40em) {
+  body {
+    align-items: center;
+  }
+
+  .dashboard {
+    max-width: 64rem;
+    display: flex;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .clock {
+    flex: 1;
+    margin: 0 2.5rem 0 0;
+  }
+
+  .arrivals {
+    flex: 1.3;
+    min-width: 0;
+  }
+
+  .clock-time {
+    font-size: 4rem;
+    font-size: clamp(3.5rem, 10vw, 6.5rem);
+  }
+}
+
+/* Short landscape screens (old phones): tighten rows so six still fit. */
+@media (orientation: landscape) and (max-height: 32em) {
+  .arrival {
+    padding: 0.55rem 1rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .arrival:first-child {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .arrivals-status {
+    margin-top: 0.6rem;
   }
 }

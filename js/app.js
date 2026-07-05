@@ -4,6 +4,7 @@ import { fetchArrivals } from './bus-api.js';
 import { renderArrivals } from './arrivals.js';
 
 const els = {
+  dashboard: document.querySelector('[data-js="dashboard"]'),
   clockTime: document.querySelector('[data-js="clock-time"]'),
   clockSeconds: document.querySelector('[data-js="clock-seconds"]'),
   clockDate: document.querySelector('[data-js="clock-date"]'),
@@ -28,10 +29,12 @@ async function refreshArrivals() {
     renderArrivals(els.arrivalsList, arrivals.slice(0, config.maxArrivals));
     lastUpdatedAt = currentTime();
     els.status.textContent = 'Updated ' + lastUpdatedAt;
+    els.dashboard.classList.remove('is-stale');
   } catch (err) {
     els.status.textContent = lastUpdatedAt
       ? 'Bus data unavailable — last updated ' + lastUpdatedAt
       : 'Bus data unavailable';
+    els.dashboard.classList.add('is-stale');
   }
 }
 

@@ -14,12 +14,13 @@
   <link rel="apple-touch-icon" href="icon.png">
 
   <link rel="manifest" href="site.webmanifest">
+  <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#0b0e13">
 </head>
 
 <body>
 
-  <main class="dashboard">
+  <main class="dashboard" data-js="dashboard">
 
     <header class="clock">
       <p class="clock-time">
@@ -45,7 +46,9 @@
         </h1>
         <p class="arrivals-stop" data-js="stop-name">&nbsp;</p>
       </header>
-      <ol class="arrivals-list" data-js="arrivals-list"></ol>
+      <ol class="arrivals-list" data-js="arrivals-list">
+        <li class="arrivals-empty">Loading&hellip;</li>
+      </ol>
       <p class="arrivals-status" data-js="status">&nbsp;</p>
     </section>
 
