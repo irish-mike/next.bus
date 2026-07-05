@@ -1,0 +1,189 @@
+/* next.bus dashboard — dark, minimal, mobile-first */
+
+:root {
+  --bg: #0b0e13;
+  --surface: #12161e;
+  --border: #1f2732;
+  --text: #e8edf2;
+  --text-dim: #7d8a9c;
+  --accent: #57d993;
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, Menlo, monospace;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 30rem;
+  padding: 2rem 1.25rem 2.5rem;
+  box-sizing: border-box;
+}
+
+/* Clock
+   ========================================================================== */
+
+.clock {
+  text-align: center;
+  margin-bottom: 2.25rem;
+}
+
+.clock-time {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 4.5rem;
+  font-size: clamp(4rem, 22vw, 6.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.clock-seconds {
+  font-size: 0.35em;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin-left: 0.35em;
+}
+
+.clock-date {
+  margin: 0.75rem 0 0;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Arrivals
+   ========================================================================== */
+
+.arrivals-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0 0.25rem;
+}
+
+.arrivals-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+}
+
+.arrivals-icon {
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.5em;
+}
+
+.arrivals-stop {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.arrivals-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.arrival {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.6rem;
+}
+
+/* The very next bus gets a touch of emphasis. */
+.arrival:first-child {
+  border-color: rgba(87, 217, 147, 0.45);
+}
+
+.arrival:first-child .arrival-due {
+  color: var(--accent);
+}
+
+.arrival-route {
+  min-width: 3.6em;
+  padding: 0.35em 0.6em;
+  border-radius: 0.5rem;
+  background: rgba(87, 217, 147, 0.12);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.arrival-destination {
+  flex: 1;
+  min-width: 0;
+  margin: 0 0.9rem;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arrival-due {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.25rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.arrivals-status {
+  margin: 0.9rem 0 0;
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+}
+
+/* Larger panels (tablet on the wall) get roomier type. */
+@media (min-width: 48em) {
+  .dashboard {
+    max-width: 36rem;
+    padding-top: 3.5rem;
+  }
+
+  .arrival {
+    padding: 1.1rem 1.25rem;
+  }
+
+  .arrival-route {
+    font-size: 1.35rem;
+  }
+
+  .arrival-destination {
+    font-size: 1.25rem;
+  }
+
+  .arrival-due {
+    font-size: 1.5rem;
+  }
+}
