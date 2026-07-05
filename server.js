@@ -36,6 +36,16 @@ http
   })
   .listen(PORT, () => {
     console.log('next.bus running at http://localhost:' + PORT);
+  })
+  .on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(
+        'Port ' + PORT + ' is already in use. Try: node server.js ' + (PORT + 1)
+      );
+    } else {
+      console.error(err.message);
+    }
+    process.exit(1);
   });
 
 function proxyToEmt(req, res) {
