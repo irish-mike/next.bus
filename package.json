@@ -1,13 +1,10 @@
 {
-  "name": " ",
+  "name": "next.bus",
   "version": "0.0.1",
-  "description": "",
+  "description": "Wall-panel dashboard showing the next buses at a Valencia EMT stop",
   "private": true,
-  "keywords": [
-    ""
-  ],
-  "license": "",
-  "author": "",
+  "license": "MIT",
+  "author": "Michael Grinnell",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open --config webpack.config.dev.js",

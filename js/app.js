@@ -17,7 +17,8 @@ els.stopName.textContent = config.stopName;
 
 startClock(
   { timeEl: els.clockTime, secondsEl: els.clockSeconds, dateEl: els.clockDate },
-  config.clockIntervalMs
+  config.clockIntervalMs,
+  config.locale
 );
 
 // On failure the last good list stays on screen; only the status line changes.

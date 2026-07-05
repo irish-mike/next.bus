@@ -1,5 +1,21 @@
 /* next.bus dashboard — dark, minimal, mobile-first */
 
+/* Reset
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Theme
+   ========================================================================== */
+
 :root {
   --bg: #0b0e13;
   --surface: #12161e;
@@ -19,6 +35,7 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
   background: var(--bg);
   color: var(--text);
   font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -32,8 +49,7 @@ body {
 .dashboard {
   width: 100%;
   max-width: 30rem;
-  padding: 2rem 1.25rem 2.5rem;
-  box-sizing: border-box;
+  padding: 2rem 1.25rem;
 }
 
 /* Clock
@@ -159,7 +175,6 @@ body {
   font-size: 1.15rem;
   font-weight: 700;
   text-align: center;
-  box-sizing: border-box;
 }
 
 .arrival-destination {
@@ -201,7 +216,6 @@ body {
 @media (min-width: 48em) {
   .dashboard {
     max-width: 38rem;
-    padding-top: 3.5rem;
   }
 
   .arrival {
@@ -240,10 +254,6 @@ body {
 /* Wall-mounted landscape: clock and arrivals side by side so all six
    rows fit on screen without scrolling. */
 @media (orientation: landscape) and (min-width: 40em) {
-  body {
-    align-items: center;
-  }
-
   .dashboard {
     max-width: 64rem;
     display: flex;
