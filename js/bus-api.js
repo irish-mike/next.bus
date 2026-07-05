@@ -13,11 +13,24 @@ function parseArrivals(xmlText) {
   if (doc.querySelector('parsererror')) {
     throw new Error('Invalid XML');
   }
-  return Array.from(doc.querySelectorAll('bus')).map((bus) => ({
-    route: text(bus, 'linea'),
-    destination: text(bus, 'destino'),
-    minutes: text(bus, 'minutos'),
-  }));
+  const arrivals = Array.from(doc.querySelectorAll('bus'))
+    .map((bus) => ({
+      route: text(bus, 'linea'),
+      destination: text(bus, 'destino'),
+      minutes: text(bus, 'minutos'),
+    }))
+    .filter((a) => a.route !== '');
+  // The feed reports problems as an <error> message with no usable buses.
+  if (arrivals.length === 0 && feedError(doc)) {
+    throw new Error('EMT feed error');
+  }
+  return arrivals;
+}
+
+function feedError(doc) {
+  return Array.from(doc.querySelectorAll('error')).some(
+    (el) => el.textContent.trim() !== ''
+  );
 }
 
 function text(parent, selector) {
